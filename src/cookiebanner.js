@@ -217,6 +217,8 @@
                 'By continuing to visit this site you agree to our use of cookies.';
             var default_link = 'Learn more';
 
+            var sessionStorage = window.sessionStorage;
+
             this.default_options = {
                 // autorun: true,
                 cookie: 'cookiebanner-accepted',
@@ -225,6 +227,7 @@
                 debug: false,
                 expires: Infinity,
                 zindex: 255,
+                closeOnInteraction: false,
                 mask: false,
                 maskOpacity: 0.5,
                 maskBackground: '#000',
@@ -258,6 +261,7 @@
             // TODO: parse/validate other options that can benefit
             this.options.zindex = parseInt(this.options.zindex, 10);
             this.options.mask = Utils.str2bool(this.options.mask);
+            this.options.closeOnInteraction = Utils.str2bool(this.options.closeOnInteraction);
 
             // check for a possible global callback specified as a string
             if ('string' === typeof this.options.expires) {
@@ -276,6 +280,15 @@
             // that has the required id attribute.
             // For manually created instances one must call run() explicitly.
             if (this.script_el) {
+                if (this.options.closeOnInteraction) {
+                    if (sessionStorage.getItem("shown")) {
+                        if (window.location.href.indexOf(this.options.moreinfo) == -1) {
+                            this.agree_and_close();
+                        }
+                    } else {
+                        sessionStorage.setItem("shown", true);
+                    }
+                }
                 this.run();
             }
         },
