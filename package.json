@@ -1,6 +1,6 @@
 {
   "name": "cookiebanner",
-  "version": "1.2",
+  "version": "1.2.0",
   "author": "Diego Perini, Good Code, Nephila",
   "license": "MIT",
   "devDependencies": {
