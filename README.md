@@ -43,6 +43,7 @@ style. The following options are settable through a `data-` property on the
 * `mask-opacity` - the opacity to use for the window mask (default: `0.5`)
 * `mask-background` - optional background style you wish to apply to the `mask` <div> (default: `#000`)
 * `zindex` - z-index to set on the notice (default: `255`). If `mask` is used, the notice <div>'s z-index is automatically incremented by 1 so it appears above the mask)
+* `close-on-interaction` - automatically accept cookie policy after any interaction.
 
 Here's an example:
 
