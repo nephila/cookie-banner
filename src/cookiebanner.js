@@ -217,6 +217,8 @@
                 'By continuing to visit this site you agree to our use of cookies.';
             var default_link = 'Learn more';
 
+            var sessionStorage = window.sessionStorage;
+
             this.default_options = {
                 // autorun: true,
                 cookie: 'cookiebanner-accepted',
@@ -225,23 +227,16 @@
                 debug: false,
                 expires: Infinity,
                 zindex: 255,
+                closeOnInteraction: false,
                 mask: false,
                 maskOpacity: 0.5,
                 maskBackground: '#000',
-                height: 'auto',
-                minHeight: '21px',
-                bg: '#000',
-                fg: '#ddd',
-                link: '#aaa',
                 position: 'bottom',
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
                 effect: null,
-                fontSize: '14px',
-                fontFamily: 'arial, sans-serif',
                 instance: global_instance_name,
-                textAlign: 'center'
             };
 
             this.options = this.default_options;
@@ -266,6 +261,7 @@
             // TODO: parse/validate other options that can benefit
             this.options.zindex = parseInt(this.options.zindex, 10);
             this.options.mask = Utils.str2bool(this.options.mask);
+            this.options.closeOnInteraction = Utils.str2bool(this.options.closeOnInteraction);
 
             // check for a possible global callback specified as a string
             if ('string' === typeof this.options.expires) {
@@ -284,6 +280,15 @@
             // that has the required id attribute.
             // For manually created instances one must call run() explicitly.
             if (this.script_el) {
+                if (this.options.closeOnInteraction) {
+                    if (sessionStorage.getItem("shown")) {
+                        if (window.location.href.indexOf(this.options.moreinfo) == -1) {
+                            this.agree_and_close();
+                        }
+                    } else {
+                        sessionStorage.setItem("shown", true);
+                    }
+                }
                 this.run();
             }
         },
@@ -381,18 +386,7 @@
             el.style.position = 'fixed';
             el.style.left = 0;
             el.style.right = 0;
-            el.style.height = this.options.height;
-            el.style.minHeight = this.options.minHeight;
             el.style.zIndex = zidx;
-            el.style.background = this.options.bg;
-            el.style.color = this.options.fg;
-            el.style.lineHeight = el.style.minHeight;
-
-            el.style.padding = '5px 16px';
-
-            el.style.fontFamily = this.options.fontFamily;
-            el.style.fontSize = this.options.fontSize;
-            el.style.textAlign = this.options.textAlign;
 
             if ('top' === this.options.position) {
                 el.style.top = 0;
@@ -400,7 +394,7 @@
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div class="cookiebanner-close" style="float:right;padding-left:5px;">' +
+            el.innerHTML = '<div class="cookiebanner-close" style="float:right;">' +
                 this.options.closeText + '</div>' +
                 '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
 
@@ -409,8 +403,6 @@
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
             el_a.target = '_blank';
-            el_a.style.textDecoration = 'none';
-            el_a.style.color = this.options.link;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
