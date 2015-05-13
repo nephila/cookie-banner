@@ -228,20 +228,12 @@
                 mask: false,
                 maskOpacity: 0.5,
                 maskBackground: '#000',
-                height: 'auto',
-                minHeight: '21px',
-                bg: '#000',
-                fg: '#ddd',
-                link: '#aaa',
                 position: 'bottom',
                 message: default_text,
                 linkmsg: default_link,
                 moreinfo: 'http://aboutcookies.org',
                 effect: null,
-                fontSize: '14px',
-                fontFamily: 'arial, sans-serif',
                 instance: global_instance_name,
-                textAlign: 'center'
             };
 
             this.options = this.default_options;
@@ -381,18 +373,7 @@
             el.style.position = 'fixed';
             el.style.left = 0;
             el.style.right = 0;
-            el.style.height = this.options.height;
-            el.style.minHeight = this.options.minHeight;
             el.style.zIndex = zidx;
-            el.style.background = this.options.bg;
-            el.style.color = this.options.fg;
-            el.style.lineHeight = el.style.minHeight;
-
-            el.style.padding = '5px 16px';
-
-            el.style.fontFamily = this.options.fontFamily;
-            el.style.fontSize = this.options.fontSize;
-            el.style.textAlign = this.options.textAlign;
 
             if ('top' === this.options.position) {
                 el.style.top = 0;
@@ -400,7 +381,7 @@
                 el.style.bottom = 0;
             }
 
-            el.innerHTML = '<div class="cookiebanner-close" style="float:right;padding-left:5px;">' +
+            el.innerHTML = '<div class="cookiebanner-close" style="float:right;">' +
                 this.options.closeText + '</div>' +
                 '<span>' + this.options.message + ' <a>' + this.options.linkmsg + '</a></span>';
 
@@ -409,8 +390,6 @@
             var el_a = el.getElementsByTagName('a')[0];
             el_a.href = this.options.moreinfo;
             el_a.target = '_blank';
-            el_a.style.textDecoration = 'none';
-            el_a.style.color = this.options.link;
 
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
