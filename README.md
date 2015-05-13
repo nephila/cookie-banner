@@ -7,16 +7,12 @@ and you're done.
 Cookie Banner script is very lightweight and depends on no JavaScript
 libraries, css files or images.
 
-## Demo
-
-To see the script in action, visit the [Good Code web page](http://goodcode.io/).
-
 ## Quickstart
 
 Add a single line to your web page, just before the closing `</body>` tag:
 
     <script type="text/javascript" id="cookiebanner"
-        src="http://cookiebanner.eu/js/cookiebanner.min.js"></script>
+        src="js/cookiebanner.min.js"></script>
 
 This will display a black-and-white floating banner at the bottom of your
 web page, informing the user that the site is using cookies, and giving them
@@ -32,17 +28,10 @@ If you don't like the defaults, you can modify the banner content and
 style. The following options are settable through a `data-` property on the
 `script` tag:
 
-* `height` - banner height (default: 32 pixels)
-* `fg` - banner text color (default: `#ddd`)
-* `bg` - banner background color (default: `#000`)
-* `link` - link text color (default: `#aaa`)
 * `position` - banner position, `top` or `bottom` (default: `bottom`)
 * `message` - the message text
 * `linkmsg` - the link text content (default: `Learn more`)
 * `close-text` - the text/symbol for the close button (default: `&#10006;`)
-* `font-size` - the text size of the message and the link (default: `14px`)
-* `font-family` - the font family of the message and the link (default: `arial, sans-serif`)
-* `text-align` - The position of the text (default: `center`)
 * `effect` - effect to use
 * `cookie` - name for the cookie to store the cookiebanner acceptance
   information (default: `cookiebanner-accepted`)
@@ -58,24 +47,14 @@ style. The following options are settable through a `data-` property on the
 Here's an example:
 
     <script type="text/javascript" id="cookiebanner"
-        src="//cookiebanner.eu/js/cookiebanner.js"
-        data-height="20px" data-position="top"
+        src="js/cookiebanner.min.js"
+        data-position="top"
         data-message="We use cookies to improve your browsing experience.">
     </script>
 
-## Self-hosting
-
-If you don't want to depend on the `cookiebanner.eu` site, you can copy
-the `cookiebanner.min.js` directly to your site.
-
-If you're using SSL, you'll also need to host the file yourself, as Amazon S3
-service that we're using for hosting doesn't support adding custom SSL
-certificates.
-
 ## Internals and more options
 
-If the banner needs to be shown, the script will create the following DOM
-subtree and add it just before the closing `</body>` tag:
+If the banner needs to be shown, the script will create the following DOM subtree and add it just before the closing `</body>` tag:
 
     <div class="cookiebanner">
         <div class="cookiebanner-close" style="float: right; padding-left:5px;">x</div>
@@ -89,36 +68,9 @@ further modify the banner appearance.
 You can also try customizing the close button via the `.cookiebanner-close` CSS class.
 Keep in mind that you might have to override and/or reset certain properties by using `!important` CSS rules.
 
-## Hacking
-
-Get the newest and the freshest from GitHub:
-
-    git clone https://github.com/dobarkod/cookie-banner.git
-
-If you've modified the code, it's recommended you run it through linter
-to catch potential errors, and minifier to minimize its footprint.
-
-We're old-school here so we just use Makefile for the tasks:
-
-    make check  # run jshint to check the code
-    make # minify it
-
-You'll need `jshint` and `uglifyjs` tools installed for this.
-
-Pull requests are welcome! In order to get your pull-request accepted,
-please follow these simple rules:
-
-* all code submissions must pass cleanly (no errors) with `make check`
-* there should be no external JavaScript, CSS, image files or any other
-  dependencies
-* the code should work with no errors or warnings on recent Chrome, Firefox,
-  Safari, Internet Explorer browsers and iOS and Android platforms
-* if you want to add significant features, file an issue about it first so
-  we can discuss whether the addition makes sense for the project
-
 ## License
 
-Copyright (C) 2013 Good Code
+Copyright (C) 2013-2015 Good Code, Nephila
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
