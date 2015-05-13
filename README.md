@@ -7,6 +7,14 @@ and you're done.
 Cookie Banner script is very lightweight and depends on no JavaScript
 libraries, css files or images.
 
+## Build
+
+    $ grunt
+
+## Test
+
+    $ grunt ci
+
 ## Quickstart
 
 Add a single line to your web page, just before the closing `</body>` tag:
