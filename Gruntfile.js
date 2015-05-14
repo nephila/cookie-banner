@@ -18,6 +18,7 @@ module.exports = function (grunt) {
         jshint: {
             files: ["src/cookiebanner.js"],
         },
+        clean: ["build/"]
 
     });
 
@@ -27,6 +28,6 @@ module.exports = function (grunt) {
         }
     }
 
-    grunt.registerTask('default', ['jshint', 'qunit', 'uglify']);
+    grunt.registerTask('default', ['clean', 'jshint', 'qunit', 'uglify']);
     grunt.registerTask('ci', ['jshint', 'qunit']);
 };
