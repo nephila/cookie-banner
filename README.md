@@ -71,11 +71,28 @@ If the banner needs to be shown, the script will create the following DOM subtre
         <a href=".." target="_blank">Learn more</a>
     </div>
 
-You can use CSS with `div.cookiebanner > span` and `div.cookiebanner > a` to
-further modify the banner appearance.
+You can customize the banner appearance using css, here's an example using SCSS:
 
-You can also try customizing the close button via the `.cookiebanner-close` CSS class.
-Keep in mind that you might have to override and/or reset certain properties by using `!important` CSS rules.
+    .cookiebanner {
+        color: #FFF;
+        background-color: #000;
+        padding: 5px 16px;
+
+        a {
+            color: #FFF;
+            text-decoration: underline;
+            &:hover {
+                color: #aaa;
+            }
+        }
+    }
+
+    .cookiebanner-close {
+        color: #FFF;
+        &:hover {
+            color: #aaa;
+        }
+    }
 
 ## License
 
