@@ -11,14 +11,20 @@ module.exports = function (grunt) {
             },
             build: {
                 files: {
-                    'build/cookiebanner-<%= pkg.version %>.min.js': 'src/cookiebanner.js'
+                    'dist/<%= pkg.name %>.min.js': 'src/<%= pkg.name %>.js'
                 }
             }
         },
         jshint: {
-            files: ["src/cookiebanner.js"],
+            files: ["src/<%= pkg.name %>.js"],
         },
-        clean: ["build/"]
+        copy: {
+            main: {
+                src: 'src/<%= pkg.name %>.js',
+                dest: 'dist/<%= pkg.name %>.js',
+            },
+        },
+        clean: ["dist/"]
 
     });
 
@@ -28,6 +34,6 @@ module.exports = function (grunt) {
         }
     }
 
-    grunt.registerTask('default', ['clean', 'jshint', 'qunit', 'uglify']);
+    grunt.registerTask('default', ['clean', 'jshint', 'qunit', 'uglify', 'copy']);
     grunt.registerTask('ci', ['jshint', 'qunit']);
 };
