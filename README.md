@@ -1,4 +1,8 @@
-# Cookie Banner [![Build Status](https://api.travis-ci.org/nephila/cookie-banner.png?branch=master)](https://travis-ci.org/nephila/cookie-banner)
+# Cookie Banner
+
+[![Build Status](https://api.travis-ci.org/nephila/cookie-banner.png?branch=master)](https://travis-ci.org/nephila/cookie-banner)
+![Bower version](https://img.shields.io/bower/v/cookiebanner.svg)
+[![npm version](https://img.shields.io/npm/v/cookiebanner.svg)](https://www.npmjs.com/package/cookiebanner)
 
 Cookie Banner is a super-easy way to ensure you're complying with the EU
 cookie law. Just reference the `cookiebanner.min.js` script from your page
@@ -6,6 +10,12 @@ and you're done.
 
 Cookie Banner script is very lightweight and depends on no JavaScript
 libraries, css files or images.
+
+## Install
+You can install with [bower](http://bower.io/) or [npm](https://www.npmjs.com/).
+
+    $ bower install cookiebanner
+    $ npm install cookiebanner
 
 ## Build
 
