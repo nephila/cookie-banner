@@ -188,6 +188,21 @@
         this.init(opts);
     };
 
+    function on(el, ev, fn) {
+        var add = el.addEventListener ? 'addEventListener' : 'attachEvent',
+            pre = el.addEventListener ? '' : 'on';
+        el[add](pre + ev, fn, false);
+    }
+
+    function is(el, els) {
+        for (var i = 0 ; i < els.length ; i++) {
+            if (el === els[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     Cookiebanner.prototype = {
 
         // for testing stuff from the outside mostly
@@ -202,8 +217,6 @@
             var default_text = 'We use cookies to enhance your experience. ' +
                 'By continuing to visit this site you agree to our use of cookies.';
             var default_link = 'Learn more';
-
-            var sessionStorage = window.sessionStorage;
 
             this.default_options = {
                 // autorun: true,
@@ -266,15 +279,6 @@
             // that has the required id attribute.
             // For manually created instances one must call run() explicitly.
             if (this.script_el) {
-                if (this.options.closeOnInteraction) {
-                    if (sessionStorage.getItem("shown")) {
-                        if (window.location.href.indexOf(this.options.moreinfo) == -1) {
-                            this.agree_and_close();
-                        }
-                    } else {
-                        sessionStorage.setItem("shown", true);
-                    }
-                }
                 this.run();
             }
         },
@@ -393,12 +397,6 @@
             var el_x = el.getElementsByTagName('div')[0];
             el_x.style.cursor = 'pointer';
 
-            function on(el, ev, fn) {
-                var add = el.addEventListener ? 'addEventListener' : 'attachEvent',
-                    pre = el.addEventListener ? '' : 'on';
-                el[add](pre + ev, fn, false);
-            }
-
             var self = this;
             on(el_x, 'click', function(){
                 self.agree_and_close();
@@ -419,6 +417,14 @@
                 Utils.fade_in(this.element);
             } else {
                 this.element.style.opacity = 1;
+            }
+
+            if (this.options.closeOnInteraction) {
+                on(doc.body, 'click', function(e){
+                    if (!is(e.target, [el_a, el_x])) {
+                        self.agree_and_close();
+                    }
+                });
             }
         }
 
